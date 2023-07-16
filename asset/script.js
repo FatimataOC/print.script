@@ -18,7 +18,9 @@ const slides = [
 ]
 let banner = document.getElementById("banner")
 let bannerImg = document.getElementById("banner-img");
-let bannerImgFileName = bannerImg.src.substring (bannerImg.src.lastIndexOf('/') + 1, bannerImg.src.length);
+let bannerImgFileName = bannerImg.src.substring (bannerImg.src.lastIndexOf('/') , bannerImg.src.length);
+console.log(bannerImgFileName)
+
 const bulletpoint = document.getElementById("bullet_point");
 
 // creation des points
@@ -48,7 +50,7 @@ function changeImgAndText(bannerP,nextSlide) {
 }
 
 function changeImgSrc(imgSrc) {
-	bannerImg.src = "./assets/images/slideshow/" + imgSrc.image;
+	bannerImg.src = "./asset/images/slideshow/" + imgSrc.image;
 }
 
 // fléche précédente
