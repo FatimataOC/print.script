@@ -1,3 +1,4 @@
+ // represente un tableau avec une liste de données (image et texte)
 const slides = [
 	{
 		"image":"slide1.jpg",
@@ -16,50 +17,51 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
-let banner = document.getElementById("banner")
+
 let bannerImg = document.getElementById("banner-img");
-let bannerImgFileName = bannerImg.src.substring (bannerImg.src.lastIndexOf('/') , bannerImg.src.length);
+let bannerImgFileName = bannerImg.src.substring (bannerImg.src.lastIndexOf('/') +1, bannerImg.src.length);// correspond au chemin de l'image src=./asset/images/slideshow/slide1.jpg 
 console.log(bannerImgFileName)
 
 const bulletpoint = document.getElementById("bullet_point");
 
 // creation des points
-for (let i = 0; i < slides.length; i++) {  
-	let dotElement = document.createElement("div");
-	dotElement.className = "dot";
-	bulletpoint.appendChild(dotElement);
+for (let i = 0; i < slides.length; i++) {    // le depart de la boucle est a 0 et s'arettera au bout 4 parmi la liste slides
+ 
+	let dotElement = document.createElement("div"); 
+	dotElement.className = "dot";// elle a pour class dot
+	bulletpoint.appendChild(dotElement);// div class bulletpoint est parent de dot
 
-	if(bannerImgFileName === slides[i].image) { 
-		dotElement.className += " dot_selected";
+	if(bannerImgFileName === slides[i].image) {  // la src de l'image de la page index et strictement egal a l'image[0] dans la liste slides
+		dotElement.className += " dot_selected"; //  le point apparait remplit a la premiere image
 
 	}
 }
 
-function addDotSelectedToElement(element) { 
+function addDotSelectedToElement(element) { //a pour fonction de la remplisage du point
 	element.classList.add("dot_selected");
 }
 
-function removeDotSelectedFromElement(element) { 
+function removeDotSelectedFromElement(element) { //a pour fonction d'effacer le remplisage du point
 	element.classList.remove("dot_selected");
 }
 
 
-function changeImgAndText(bannerP,nextSlide) { 
+function changeImgAndText(bannerP,nextSlide) { // a pour fonction de changer l'image et le text permet de passer a l'image suivante
 	bannerImgFileName = nextSlide.image;
 	bannerP.innerHTML = nextSlide.tagLine;
 }
 
 function changeImgSrc(imgSrc) {
-	bannerImg.src = "./asset/images/slideshow/" + imgSrc.image;
+	bannerImg.src = "./asset/images/slideshow/" + imgSrc.image; // ajouter les autre images fichier /.asset/images/slideshow/
 }
 
 // fléche précédente
-document.getElementById("slide-left").addEventListener('click', function() {
+document.getElementById("slide-left").addEventListener('click', function() { // L'evenemet permet de passer a l'image precédente au click
 	
 	let nextImgIndex = 0;
 	let bannerP = document.getElementById("banner-p");
 	let dotElement = document.getElementsByClassName("dot");
-console.log(bannerP,dotElement,nextImgIndex);
+
 for (let i = 0; i < slides.length; i++) {
 	if(bannerImgFileName === slides[0].image) {
 		changeImgSrc(slides[slides.length - 1]);
